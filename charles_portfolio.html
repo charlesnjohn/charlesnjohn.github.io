@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charles N. John</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-black: #0a0a0a;
+            --soft-black: #1a1a1a;
+            --medium-gray: #4a4a4a;
+            --light-gray: #8a8a8a;
+            --border-gray: #e1e1e1;
+            --background-white: #ffffff;
+            --surface-gray: #fafafa;
+            --hover-gray: #f5f5f5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--primary-black);
+            background-color: var(--background-white);
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Header with Tabs */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .nav-brand {
+            text-align: center;
+            padding: 20px 0 15px;
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 300;
+            color: var(--primary-black);
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 0;
+        }
+
+        .nav-tab {
+            position: relative;
+        }
+
+        .nav-tab a {
+            display: block;
+            padding: 20px 32px;
+            text-decoration: none;
+            color: var(--medium-gray);
+            font-weight: 400;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-tab a:hover,
+        .nav-tab a.active {
+            color: var(--primary-black);
+            border-bottom-color: var(--primary-black);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 140px;
+            min-height: calc(100vh - 140px);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .wide-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Home Tab */
+        .hero-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 200;
+            margin-bottom: 30px;
+            letter-spacing: -2px;
+            line-height: 0.9;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(18px, 3vw, 24px);
+            color: var(--medium-gray);
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .hero-description {
+            font-size: 18px;
+            color: var(--light-gray);
+            max-width: 600px;
+            margin: 0 auto 60px;
+            line-height: 1.8;
+        }
+
+        .quick-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .quick-link {
+            display: inline-block;
+            padding: 16px 24px;
+            margin: 8px;
+            text-decoration: none;
+            color: var(--medium-gray);
+            border: 1px solid var(--border-gray);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 14px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quick-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.05), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .quick-link:hover::before {
+            left: 100%;
+        }
+
+        .quick-link:hover {
+            color: var(--primary-black);
+            border-color: var(--primary-black);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 80px 0;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 80px;
+            align-items: start;
+            margin-bottom: 80px;
+        }
+
+        .about-text h2 {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            letter-spacing: -1px;
+        }
+
+        .about-text p {
+            font-size: 16px;
+            color: var(--medium-gray);
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        /* Career Tab */
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 300;
+            margin-bottom: 50px;
+            text-align: center;
+            letter-spacing: -1px;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--border-gray);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 60px;
+            padding-left: 100px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 46px;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            background: var(--primary-black);
+            border-radius: 50%;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--border-gray);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .job-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .company {
+            color: var(--medium-gray);
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .duration {
+            font-size: 14px;
+            color: var(--light-gray);
+            margin-bottom: 20px;
+        }
+
+        .job-description {
+            color: var(--medium-gray);
+            line-height: 1.6;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .skill-category {
+            padding: 40px;
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .skill-category h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .skill-tag {
+            background: var(--surface-gray);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: var(--medium-gray);
+            border: 1px solid var(--border-gray);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--primary-black);
+            color: white;
+        }
+
+        /* Research Section */
+        .publications-list {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .publication-item {
+            margin-bottom: 30px;
+            font-size: 16px;
+            color: var(--medium-gray);
+        }
+
+
+        /* Substack Tab */
+        .substack-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .substack-intro {
+            font-size: 18px;
+            color: var(--medium-gray);
+            max-width: 600px;
+            margin: 0 auto 60px;
+            line-height: 1.7;
+        }
+
+        .substack-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 40px;
+            border: 2px solid var(--primary-black);
+            border-radius: 50px;
+            text-decoration: none;
+            color: var(--primary-black);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .substack-icon {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--primary-black);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .substack-link:hover {
+            background: var(--primary-black);
+            color: white;
+        }
+
+        /* Ministry Tab */
+        .ministry-content {
+            padding: 80px 0;
+        }
+
+        .ministry-intro {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .ministry-intro h2 {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .ministry-intro p {
+            font-size: 18px;
+            color: var(--medium-gray);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .ministry-activities {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .ministry-card {
+            padding: 40px;
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .ministry-card:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .ministry-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .ministry-card p {
+            color: var(--medium-gray);
+            line-height: 1.6;
+        }
+
+        /* Companies Section */
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .company-card {
+            padding: 40px;
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        
+
+        .company-card:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .company-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .company-description {
+            color: var(--medium-gray);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .company-link {
+            display: inline-block;
+            color: var(--primary-black);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .company-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--primary-black);
+            transition: width 0.3s ease;
+        }
+
+        .company-link:hover::after {
+            width: 100%;
+        }
+
+        /* Contact Tab */
+        .contact-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .contact-intro {
+            font-size: 18px;
+            color: var(--medium-gray);
+            max-width: 600px;
+            margin: 0 auto 60px;
+            line-height: 1.7;
+        }
+
+        .contact-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: inline-block;
+            padding: 16px 24px;
+            margin: 8px;
+            text-decoration: none;
+            color: var(--medium-gray);
+            border: 1px solid var(--border-gray);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 14px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.05), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .contact-item:hover::before {
+            left: 100%;
+        }
+
+        .contact-item:hover {
+            color: var(--primary-black);
+            border-color: var(--primary-black);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 20px;
+            }
+
+            .nav-tabs {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-tab a {
+                padding: 15px 20px;
+                font-size: 14px;
+            }
+
+            .container, .wide-container {
+                padding: 0 20px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                padding-left: 50px;
+            }
+
+            .timeline-dot {
+                left: 16px;
+            }
+
+            .quick-links {
+                gap: 20px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ministry-activities {
+                grid-template-columns: 1fr;
+            }
+
+            .companies-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="nav-brand">
+                <a href="#" class="logo">Charles N. John</a>
+            </div>
+            <nav>
+                <ul class="nav-tabs">
+                    <li class="nav-tab">
+                        <a href="#" data-tab="home" class="active">Home</a>
+                    </li>
+                    <li class="nav-tab">
+                        <a href="#" data-tab="career">Career</a>
+                    </li>
+                    <li class="nav-tab">
+                        <a href="#" data-tab="research">Research</a>
+                    </li>
+                    <li class="nav-tab">
+                        <a href="#" data-tab="companies">Companies</a>
+                    </li>
+                    <li class="nav-tab">
+                        <a href="#" data-tab="ministry">Ministry</a>
+                    </li>
+                    <li class="nav-tab">
+                        <a href="#" data-tab="writing">Writing</a>
+                    </li>
+                    <li class="nav-tab">
+                        <a href="#" data-tab="contact">Connect</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Home Tab -->
+        <div id="home" class="tab-content active">
+            <section class="hero-section">
+                <div class="container">
+                    <p class="hero-subtitle">AI Developer, Founder, Community Builder, Loved by God</p>
+                    <p class="hero-description">
+                        Creation > Consumption
+
+                    </p>
+                    <div class="quick-links">
+                        <a href="#" class="quick-link" data-tab="career">Career & Experience</a>
+                        <a href="#" class="quick-link" data-tab="research">Research & Publications</a>
+                        <a href="#" class="quick-link" data-tab="companies">Companies & Ventures</a>
+                        <a href="#" class="quick-link" data-tab="ministry">Ministry & Community</a>
+                        <a href="#" class="quick-link" data-tab="writing">Writing & Ideas</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="about-section">
+                <div class="container">
+                    <div class="about-grid">
+                        <div class="about-text">
+                            <h2>About Me</h2>
+                            <p>
+                                Hello, I am Charles. I have varied interests among many fields. I believe technology in the hands of the good makes peoples' lives better. It can be tyrannical in the hands of bad actors. 
+                                My work in AI isn't just about building smarter systems—it's about creating tools 
+                                that genuinely improve lives.
+                            </p>
+                            <p>
+                                From developing diagnostic tools during COVID-19 to creating safety systems for 
+                                industrial workers, I've seen how thoughtful technology can make a real difference. 
+                                But I've also learned that the most meaningful impact often happens when technology is used as a tool to better the community rather than the made master that rules.
+                            </p>
+                            <p>
+                                I enjoy spending time building relationships with international students 
+                                and exploring ideas through writing as I do training neural networks. I love to invest in the lives of kids to make wonderful citizens and leaders. 
+                                Good technology serves people, but great technology builds communities.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Career Tab -->
+        <div id="career" class="tab-content">
+            <div class="container">
+                <section class="section">
+                    <h2 class="section-title">Professional Experience</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="job-title">Machine Learning Developer</div>
+                                <div class="company">Seqtek</div>
+                                <div class="duration">July 2021 - Present</div>
+                                <div class="job-description">
+                                    Leading AI innovation in industrial applications. Developed anomalous sound detection systems 
+                                    for oil & gas equipment with 95%+ accuracy, enabling predictive maintenance that prevents 
+                                    costly failures. Created computer vision solutions for real-time safety monitoring, 
+                                    directly preventing workplace accidents.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="job-title">Graduate Researcher</div>
+                                <div class="company">AI4Networks Research Center</div>
+                                <div class="duration">2018 - 2020</div>
+                                <div class="job-description">
+                                    Pioneered AI-powered health diagnostics during COVID-19. Worked on smartphone applications 
+                                    capable of detecting respiratory conditions through cough analysis, contributing to public 
+                                    health initiatives. Research has been cited 800+ times internationally.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="job-title">Campus Planter and Volunteer</div>
+                                <div class="company">International Community Outreach</div>
+                                <div class="duration">Aug 2020 - Present</div>
+                                <div class="job-description">
+                                    Volunteered to establish International Student Ministry at NSU after being involved at ISM in Tulsa for a few years. 
+                                    ISM commmunity had in many ways changed the way I looked at life and gave me a rich cultural and 
+                                    faith experience. I'd like to do the same for many other international students across the globe. 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">Technical Skills</h2>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h3>Machine Learning</h3>
+                            <div class="skills-list">
+                                <span class="skill-tag">Deep Learning</span>
+                                <span class="skill-tag">Computer Vision</span>
+                                <span class="skill-tag">Audio Processing</span>
+                                <span class="skill-tag">Predictive Maintenance</span>
+                                <span class="skill-tag">Model Optimization</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Frameworks & Tools</h3>
+                            <div class="skills-list">
+                                <span class="skill-tag">PyTorch</span>
+                                <span class="skill-tag">TensorFlow</span>
+                                <span class="skill-tag">Keras</span>
+                                <span class="skill-tag">AWS</span>
+                                <span class="skill-tag">Docker</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Development</h3>
+                            <div class="skills-list">
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">Linux</span>
+                                <span class="skill-tag">Git</span>
+                                <span class="skill-tag">Edge Deployment</span>
+                                <span class="skill-tag">System Integration</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Design & Communication</h3>
+                            <div class="skills-list">
+                                <span class="skill-tag">Technical Writing</span>
+                                <span class="skill-tag">Data Visualization</span>
+                                <span class="skill-tag">Tableau</span>
+                                <span class="skill-tag">Cross-cultural Communication</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Research Tab -->
+        <div id="research" class="tab-content">
+            <div class="container">
+                <section class="section">
+                    <h2 class="section-title">Research & Publications</h2>
+                    <div class="publications-list">
+                        <div class="publication-item">
+                            <div class="publication-item">
+                                Imran, Ali, Iryna Posokhova, Haneya N. Qureshi, Usama Masood, Muhammad Sajid Riaz, Kamran Ali, Charles N. John, MD Iftikhar Hussain, and Muhammad Nabeel. "AI4COVID-19: AI enabled preliminary diagnosis for COVID-19 from cough samples via an app." <em>Informatics in medicine unlocked</em> 20 (2020): 100378.
+                            </div>
+                            
+                        </div>
+
+                        <div class="publication-item">
+                            <div class="publication-item">
+                                Bales, Charles, Muhammad Nabeel, Charles N. John, Usama Masood, Haneya N. Qureshi, Hasan Farooq, Iryna Posokhova, and Ali Imran. "Can machine learning be used to recognize and diagnose coughs?." In <em>2020 International Conference on e-Health and Bioengineering (EHB)</em>, pp. 1-4. IEEE, 2020.
+                            </div>
+                        </div>
+
+                        <div class="publication-item">
+                            <div class="publication-item">
+                                John, Charles. "Practical cough detection in presence of background noise and preliminary differential diagnosis from cough sound using artificial intelligence." (2020).
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Ministry Tab -->
+        <div id="ministry" class="tab-content">
+            <div class="container">
+                <div class="ministry-content">
+                    <div class="ministry-intro">
+                        <h2>Ministry & Community</h2>
+                        <p>
+                            Since I was a kid I had involved in ministry in some form. My devout Hindu grandfather came to know Christ when he was young
+                            through a miraculous healing in his body. All his devotion turned then to Lord Jesus and started following Him and gave his
+                             life to serve Him and people. Growing up with him, it became part of my life to help people and involved in ministry 
+                             at some capacity. These days my work in ministry focuses on creating spaces where international students can find belonging 
+                             and local communities can experience the 
+                            richness of global perspectives.
+                        </p>
+                    </div>
+                    <div class="ministry-activities">
+                        <div class="ministry-card">
+                            <h3>International Student Ministry</h3>
+                            <p>
+                                Established and led ministry programs at Northeastern State University, creating 
+                                pathways for international students to integrate into local communities. Facilitated connections between international students and local families, 
+                                churches, and organizations, creating lasting relationships that enrich both 
+                                newcomers and established community members.
+                            </p>
+                        </div>
+                        <div class="ministry-card">
+                            <h3>Teach India</h3>
+                            <p>
+                                
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Companies Tab -->
+        <div id="companies" class="tab-content">
+            <div class="container">
+                <section class="section">
+                    <h2 class="section-title">Companies & Ventures</h2>
+                    <div class="companies-grid">
+                        <div class="company-card">
+                            <h3>LohTek Solutions</h3>
+                            <p class="company-description">
+                                Comes from an old story where David steals the iron (LOH) technology (TEK) from Philistines to bring victory during his reign.
+                                We tame the iron of technology in this age that shapes the culture. 
+                            </p>
+                            <a href="https://lohtek.com" target="_blank" class="company-link">Visit LohTek →</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Articles Tab -->
+        <div id="articles" class="tab-content">
+            <div class="container">
+                <section class="section">
+                    <h2 class="section-title">Scientific Articles</h2>
+                    <div class="articles-intro">
+                        <p>
+                            Explore my full collection of peer-reviewed publications, conference papers, 
+                            and research contributions on ResearchGate. My work spans AI-powered diagnostics, 
+                            machine learning applications, and innovative solutions for real-world challenges.
+                        </p>
+                        <a href="https://www.researchgate.net/profile/Charles-John-5" target="_blank" class="articles-link">
+                            <span>View All Articles on ResearchGate</span>
+                            <span class="arrow">→</span>
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!-- Writing Tab -->
+        <div id="writing" class="tab-content">
+            <div class="container">
+                <section class="substack-section">
+                    <h2 class="section-title">Writing & Ideas</h2>
+                    <p class="substack-intro">
+                        I love writing about the things I have learned especially in understanding the Bible, 
+                        experiences, leadership, tech and personal development. 
+                         Topics range from AI ethics 
+                        to cross-cultural ministry.
+                    </p>
+                    <a href="https://charlesnjohn.substack.com/" target="_blank" class="substack-link">
+                        <div class="substack-icon">S</div>
+                        <span>Read on Substack</span>
+                    </a>
+                </section>
+            </div>
+        </div>
+
+        <!-- Contact Tab -->
+        <div id="contact" class="tab-content">
+            <div class="container">
+                <section class="contact-section">
+                    <h2 class="section-title">Let's Connect</h2>
+                    <p class="contact-intro">
+                        Whether you're interested in collaborating on AI/theology/culture research, discussing ministry opportunities, 
+                        exploring ideas about technology and society, or just want to have a conversation about 
+                        how we can use our work to make the world a little better.
+                    </p>
+                    <div class="contact-grid">
+                        <a href="mailto:charles@lohtek.com" class="contact-item">Email</a>
+                        <a href="https://www.linkedin.com/in/charlesnjohn/" class="contact-item" target="_blank">LinkedIn</a>
+                        <a href="https://scholar.google.com/citations?hl=en&user=ixWxzoYAAAAJ" class="contact-item" target="_blank">Google Scholar</a>
+                        <a href="https://www.instagram.com/charlesnjohn/" class="contact-item" target="_blank">Instagram</a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Tab switching functionality
+        const tabLinks = document.querySelectorAll('[data-tab]');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        function switchTab(targetTab) {
+            // Remove active class from all tabs and contents
+            tabLinks.forEach(link => link.classList.remove('active'));
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+                content.style.display = 'none';
+            });
+
+            // Add active class to clicked tab
+            document.querySelector(`[data-tab="${targetTab}"]`).classList.add('active');
+            
+            // Show target content with animation
+            const targetContent = document.getElementById(targetTab);
+            targetContent.style.display = 'block';
+            setTimeout(() => {
+                targetContent.classList.add('active');
+            }, 10);
+        }
+
+        // Add click event listeners to all tab links
+        tabLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetTab = link.getAttribute('data-tab');
+                switchTab(targetTab);
+            });
+        });
+
+        // Quick links functionality
+        document.querySelectorAll('.quick-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetTab = link.getAttribute('data-tab');
+                switchTab(targetTab);
+            });
+        });
+
+        // Header scroll effect
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            const currentScrollY = window.scrollY;
+            
+            if (currentScrollY > 50) {
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+        });
+
+        // Smooth animations for timeline items
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Initialize timeline animations
+        timelineItems.forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = `all 0.6s ease ${index * 0.1}s`;
+            observer.observe(item);
+        });
+
+        // Initialize skill cards animations
+        document.querySelectorAll('.skill-category').forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = `all 0.6s ease ${index * 0.1}s`;
+            observer.observe(item);
+        });
+
+        // Initialize publication animations
+        document.querySelectorAll('.publication-item').forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = `all 0.6s ease ${index * 0.1}s`;
+            observer.observe(item);
+        });
+
+        // Initialize company cards animations
+        document.querySelectorAll('.company-card').forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = `all 0.6s ease ${index * 0.1}s`;
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>
